@@ -1,15 +1,24 @@
 <template>
   <div>
-    <h1>Posts</h1>
-    <ul>
-      <li>Post 1</li>
-    </ul>
+    <h1 class="mt-5">Posts</h1>
+    <div class="card-list d-flex flex-wrap">
+      <PostCard
+        v-for="post in posts"
+        :key="post.id"
+        :post="post"
+        class="col-12"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import PostCard from "./PostCard";
 export default {
   name: "PostList",
+  components: {
+    PostCard,
+  },
   data() {
     return {
       posts: [],
