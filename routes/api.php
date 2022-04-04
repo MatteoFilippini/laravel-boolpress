@@ -19,6 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // davanti abbiamo sempre api/
-Route::get('/posts', 'ApiController@index', function () {
-    return response()->json('posts');
+Route::get('/posts', 'Api\ApiController@index', function () {
 });

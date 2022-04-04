@@ -3,9 +3,6 @@
     <h1>Posts</h1>
     <ul>
       <li>Post 1</li>
-      <li>Post 2</li>
-      <li>Post 3</li>
-      <li>Post 4</li>
     </ul>
   </div>
 </template>
@@ -13,6 +10,29 @@
 <script>
 export default {
   name: "PostList",
+  data() {
+    return {
+      posts: [],
+    };
+  },
+  methods: {
+    getPosts() {
+      axios
+        .get("http://localhost:8000/api/posts")
+        .then((res) => {
+          this.posts = res.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .then(() => {
+          console.log("Api terminata");
+        });
+    },
+  },
+  mounted() {
+    this.getPosts();
+  },
 };
 </script>
 

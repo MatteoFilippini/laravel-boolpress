@@ -2036,11 +2036,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "PostList"
+  name: "PostList",
+  data: function data() {
+    return {
+      posts: []
+    };
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+
+      axios.get("http://localhost:8000/api/posts").then(function (res) {
+        _this.posts = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      }).then(function () {
+        console.log("Api terminata");
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPosts();
+  }
 });
 
 /***/ }),
@@ -37831,15 +37849,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h1", [_vm._v("Posts")]),
       _vm._v(" "),
-      _c("ul", [
-        _c("li", [_vm._v("Post 1")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Post 2")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Post 3")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Post 4")]),
-      ]),
+      _c("ul", [_c("li", [_vm._v("Post 1")])]),
     ])
   },
 ]
