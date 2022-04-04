@@ -1,6 +1,11 @@
 <template>
   <div>
     <h1 class="mt-5">Posts</h1>
+    <Pagination
+      :current_page="current_page"
+      :page_tot="page_tot"
+      @change="change"
+    />
     <div class="card-list d-flex flex-wrap">
       <PostCard
         v-for="post in posts"
@@ -14,22 +19,31 @@
 
 <script>
 import PostCard from "./PostCard";
+import Pagination from "../Pagination";
 export default {
   name: "PostList",
   components: {
     PostCard,
+    Pagination,
   },
   data() {
     return {
       posts: [],
+      current_page: 1,
+      page_tot: 0,
     };
   },
   methods: {
-    getPosts() {
+    change(n) {
+      this.getPosts(n);
+    },
+    getPosts(n) {
       axios
-        .get("http://localhost:8000/api/posts")
+        .get("http://localhost:8000/api/posts?page=" + n)
         .then((res) => {
-          this.posts = res.data;
+          this.posts = res.data.data;
+          this.current_page = res.data.current_page;
+          this.page_tot = res.data.last_page;
         })
         .catch((err) => {
           console.error(err);
