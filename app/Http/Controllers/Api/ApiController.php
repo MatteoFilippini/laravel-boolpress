@@ -16,7 +16,7 @@ class ApiController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category')->get();
+        $posts = Post::with('category', 'user')->get();
         return response()->json($posts);
     }
 

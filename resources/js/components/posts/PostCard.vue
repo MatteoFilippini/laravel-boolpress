@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="card mb-3">
-      <div class="card-author">{{ post.id }} - nome autore</div>
+      <div class="card-author">
+        <address>{{ post.user.email }}</address>
+      </div>
       <img class="card-img-top" alt="Card image cap" :src="post.image" />
       <div class="card-body">
         <h5 class="card-title">{{ post.title }}</h5>
