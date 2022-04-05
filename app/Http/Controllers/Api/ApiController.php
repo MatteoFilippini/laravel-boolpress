@@ -39,7 +39,9 @@ class ApiController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::with('category', 'user')->find($id);
+        if (!$post) return response('Errore 404');
+        return response()->json($post);
     }
 
     /**
