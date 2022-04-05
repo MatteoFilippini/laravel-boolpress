@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\User;
+use Illuminate\Support\Facades\Crypt;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
             $user = new User();
             $user->name = $faker->word();
             $user->email = $faker->email();
-            $user->password = $faker->password();
+            $user->password = Crypt::encryptString($faker->password());
             $user->save();
         }
     }

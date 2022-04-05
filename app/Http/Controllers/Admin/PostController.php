@@ -6,9 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
+use App\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Encryption\DecryptException;
+
+
 
 class PostController extends Controller
 {
@@ -17,11 +22,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
+        $user = Auth::user();
         $posts = Post::all();
         $tags = Tag::all();
-        return view('admin.posts/index', compact('posts', 'tags'));
+
+        return view('admin.posts/index', compact('posts', 'tags',));
     }
 
     /**
@@ -48,7 +56,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['string', 'max:50', 'min:5', 'required', Rule::unique('posts')->ignore($post->id)],
             'content' => 'string|min:10|required',
-            'image' => 'url|nullable',
+            'image' => 'image|nullable',
             'category_id' => 'nullable|exists:posts,category_id',
             'tags' => 'nullable|exists:tags,id'
         ]);
@@ -99,7 +107,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['string', 'max:50', 'min:5', 'required', Rule::unique('posts')->ignore($post->id)],
             'content' => 'string|min:10|required',
-            'image' => 'url|nullable',
+            'image' => 'image|nullable',
             'category_id' => 'nullable|exists:posts,category_id',
             'tags' => 'nullable|exists:tags,id'
         ]);
