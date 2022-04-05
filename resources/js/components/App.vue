@@ -4,13 +4,7 @@
       <Header />
     </header>
     <main>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <PostList />
-          </div>
-        </div>
-      </div>
+      <router-view></router-view>
     </main>
     <footer></footer>
   </div>
