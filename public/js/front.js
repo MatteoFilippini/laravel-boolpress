@@ -1909,7 +1909,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.vue");
-/* harmony import */ var _posts_PostList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./posts/PostList */ "./resources/js/components/posts/PostList.vue");
 //
 //
 //
@@ -1922,13 +1921,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   components: {
-    Header: _Header__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PostList: _posts_PostList__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Header: _Header__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2120,12 +2117,43 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../posts/PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
 //
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "DetailPage"
+  name: "DetailPage",
+  components: {
+    PostCard: _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      post: null
+    };
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      axios.get("http://localhost:8000/api/posts/" + this.$route.params.slug).then(function (res) {
+        _this.post = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      }).then(function () {
+        console.log("Api terminata");
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPost();
+  }
 });
 
 /***/ }),
@@ -2211,9 +2239,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"]
+  props: ["post", "is-show"]
 });
 
 /***/ }),
@@ -37877,7 +37916,7 @@ var render = function () {
   return _c("div", [
     _c("header", [_c("Header")], 1),
     _vm._v(" "),
-    _c("main", [_c("router-view")], 1),
+    _c("main", { staticClass: "p-3" }, [_c("router-view")], 1),
     _vm._v(" "),
     _c("footer"),
   ])
@@ -38227,7 +38266,21 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("singolo")])
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _c("h1", [_vm._v("Dettaglio post")]),
+        _vm._v(" "),
+        _c("PostCard", {
+          staticClass: "col-12",
+          attrs: { post: _vm.post, isShow: true },
+        }),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38319,29 +38372,55 @@ var render = function () {
         attrs: { alt: "Card image cap", src: _vm.post.image },
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.post.title)),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v("\n        " + _vm._s(_vm.post.content) + "\n      "),
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("h5", { staticClass: "m-0" }, [_vm._v("Category:")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "badge badge-pill badge-primary mb-3" }, [
-            _vm._v(_vm._s(_vm.post.category.label)),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.post.title)),
           ]),
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "btn btn-primary btn-sm", attrs: { href: "#" } },
-          [_vm._v("Go somewhere")]
-        ),
-      ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("\n        " + _vm._s(_vm.post.content) + "\n      "),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("h5", { staticClass: "m-0" }, [_vm._v("Category:")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge badge-pill badge-primary mb-3" }, [
+              _vm._v(_vm._s(_vm.post.category.label)),
+            ]),
+          ]),
+          _vm._v(" "),
+          !_vm.isShow
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-primary btn-sm",
+                  attrs: {
+                    to: {
+                      name: "post-detail",
+                      params: { slug: _vm.post.slug },
+                    },
+                  },
+                },
+                [_vm._v("Dettaglio")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isShow
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-secondary btn-sm",
+                  attrs: { to: { name: "home" } },
+                },
+                [_vm._v("Indietro")]
+              )
+            : _vm._e(),
+        ],
+        1
+      ),
     ]),
   ])
 }

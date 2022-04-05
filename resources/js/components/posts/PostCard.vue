@@ -16,7 +16,18 @@
             post.category.label
           }}</span>
         </div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+        <router-link
+          :to="{ name: 'post-detail', params: { slug: post.slug } }"
+          class="btn btn-primary btn-sm"
+          v-if="!isShow"
+          >Dettaglio</router-link
+        >
+        <router-link
+          :to="{ name: 'home' }"
+          class="btn btn-secondary btn-sm"
+          v-if="isShow"
+          >Indietro</router-link
+        >
       </div>
     </div>
   </div>
@@ -25,7 +36,7 @@
 <script>
 export default {
   name: "PostCard",
-  props: ["post"],
+  props: ["post", "is-show"],
 };
 </script>
 

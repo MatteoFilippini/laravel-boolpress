@@ -3,7 +3,7 @@
     <header>
       <Header />
     </header>
-    <main>
+    <main class="p-3">
       <router-view></router-view>
     </main>
     <footer></footer>
@@ -12,12 +12,10 @@
 
 <script>
 import Header from "./Header";
-import PostList from "./posts/PostList";
 export default {
   name: "App",
   components: {
     Header: Header,
-    PostList: PostList,
   },
 };
 </script>

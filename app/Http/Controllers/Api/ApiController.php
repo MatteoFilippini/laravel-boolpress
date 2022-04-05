@@ -16,7 +16,7 @@ class ApiController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category', 'user')->paginate('3');
+        $posts = Post::with(['category', 'user'])->paginate('3');
         return response()->json($posts);
     }
 
@@ -39,8 +39,8 @@ class ApiController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->with('category', 'user')->get();
-        if (!$post) return response('Errore 404');
+        $post = Post::where('slug', $slug)->with(['user', 'category'])->first();
+        if (!$post) return response('Errore 404', 404);
         return response()->json($post);
     }
 
