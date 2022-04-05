@@ -54510,7 +54510,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_ContactPage__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: 'contacts'
   }, {
-    path: "/posts/:id",
+    path: "/posts/:slug",
     component: _components_pages_DetailPage__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'post-detail'
   }, {

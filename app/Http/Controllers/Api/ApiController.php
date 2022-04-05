@@ -37,9 +37,9 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $post = Post::with('category', 'user')->find($id);
+        $post = Post::where('slug', $slug)->with('category', 'user')->get();
         if (!$post) return response('Errore 404');
         return response()->json($post);
     }
