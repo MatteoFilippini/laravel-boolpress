@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Boolpress</a>
+    <router-link class="navbar-brand" to="/">Boolpress</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,14 +15,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >Home <span class="sr-only">(current)</span></a
+        <li class="nav-item">
+          <router-link class="nav-link" to="/"
+            >Home <span class="sr-only">(current)</span></router-link
           >
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <router-link class="nav-link" :to="{ name: 'contacts' }"
+            >Contacts</router-link
+          >
         </li>
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
