@@ -54,7 +54,6 @@ export default {
       } else {
         this.cp = this.current_page + 1;
       }
-      console.log(this.cp);
       return this.cp;
     },
   },
