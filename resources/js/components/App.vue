@@ -3,7 +3,7 @@
     <header>
       <Header />
     </header>
-    <main class="p-3">
+    <main>
       <router-view></router-view>
     </main>
     <footer></footer>

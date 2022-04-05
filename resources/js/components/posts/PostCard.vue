@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="card mb-3">
-      <div class="card-author">
-        <address>{{ post.user.email }}</address>
+      <div class="card-header">
+        <ProfileIndexInfo :userMain="true" />
       </div>
-      <img class="card-img-top" alt="Card image cap" :src="post.image" />
+      <img
+        class="card-img-top"
+        alt="Card image cap"
+        :src="post.image"
+        style="height: 600px"
+      />
       <div class="card-body">
         <h5 class="card-title">{{ post.title }}</h5>
         <p class="card-text">
@@ -34,9 +39,11 @@
 </template>
 
 <script>
+import ProfileIndexInfo from "../profile/ProfileIndexInfo.vue";
 export default {
   name: "PostCard",
   props: ["post", "is-show"],
+  components: { ProfileIndexInfo },
 };
 </script>
 

@@ -1,17 +1,16 @@
 <template>
   <div>
-    <h1 class="mt-5">Posts</h1>
-    <Pagination
+    <!-- <Pagination
       :current_page="current_page"
       :page_tot="page_tot"
       @change="change"
-    />
+    /> -->
     <div class="card-list d-flex flex-wrap">
       <PostCard
         v-for="post in posts"
         :key="post.id"
         :post="post"
-        class="col-12"
+        class="col-12 p-0"
       />
     </div>
   </div>
