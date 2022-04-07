@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // davanti abbiamo sempre api/
-
 Route::namespace('Api')->group(function () {
     Route::get('/posts', 'ApiController@index');
     Route::get('/posts/{post}', 'ApiController@show');
+    Route::post('/messages', 'ContactMessageController@send');
 });

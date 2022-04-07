@@ -26,7 +26,7 @@ class PostSeeder extends Seeder
             $post->category_id = Arr::random($category_ids);
             $post->title = $faker->text(20);
             $post->content = $faker->paragraph(2, true);
-            $post->image = $faker->imageUrl(640, 480, 'animals', true);
+            $post->image = 'https://www.chimerarevo.com/wp-content/uploads/2020/04/immagini-gratis.jpg';
             $post->slug = Str::slug($post->title, '-');
             $post->save();
         }
