@@ -56,7 +56,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['string', 'max:50', 'min:5', 'required', Rule::unique('posts')->ignore($post->id)],
             'content' => 'string|min:10|required',
-            'image' => 'image|nullable',
+            'image' => 'url|nullable',
             'category_id' => 'nullable|exists:posts,category_id',
             'tags' => 'nullable|exists:tags,id'
         ]);
@@ -107,7 +107,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['string', 'max:50', 'min:5', 'required', Rule::unique('posts')->ignore($post->id)],
             'content' => 'string|min:10|required',
-            'image' => 'image|nullable',
+            'image' => 'url|nullable',
             'category_id' => 'nullable|exists:posts,category_id',
             'tags' => 'nullable|exists:tags,id'
         ]);
